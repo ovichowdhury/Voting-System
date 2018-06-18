@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    @{
+        if (ViewBag.Message != null)
+        {
+            <span>@ViewBag.Message</span>
+        }
+    }
+
+</h2>
+
+@{
+    if (ViewBag.SeatName != null)
+    {
+        <h2>@ViewBag.SeatName[0]["seatName"]</h2>
+    }
+}
+
+@{
+    if (ViewBag.Candidates != null)
+    {
+        <form method="post" style="width:500px">
+            <ul class="list-unstyled">
+                @foreach (var candidate in ViewBag.Candidates)
+                {
+                    <li class="media" style="margin-bottom:30px; width:500px">
+                        @if (candidate["symbol"]  is System.DBNull)
+                        {
+                            <img class="mr-3" src="@Url.Content(candidate["partySymbol"])" alt="Symbol" height="100" width="150">
+                        }
+                        else
+                        {
+                            <img class="mr-3" src="@Url.Content(candidate["symbol"])" alt="Symbol" height="100" width="150">
+                        }
+                        <div class="media-body">
+                            <input type="radio" name="vote" value="@candidate["candidateId"]" style="float:right; height:50px; width:50px" />
+                            <h5 class="mt-0 mb-1">@candidate["voterName"]</h5>
+                            <h6>Party Name: @candidate["partyName"]</h6>
+                            <h6>Gender: @candidate["gender"]</h6>
+                            <h6>Total Vote: @candidate["totalVote"]</h6>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <input type="submit" value="Vote" class="btn btn-success" style="float:right"/>
+        </form>  
+            
+    }
+    else
+    {
+        <h2>There is no candidates in this seat</h2>
+    }
+}
+

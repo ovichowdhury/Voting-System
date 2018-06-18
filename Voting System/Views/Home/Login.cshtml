@@ -1,0 +1,35 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div> 
+        <p>
+            @{
+                if (TempData["error"] == null)
+                {
+                    <span>Please Enter details</span>
+                }
+                else
+                {
+                    <span>@TempData["error"]</span>
+                }
+            }
+        </p>
+        <form method="post">
+            <label>NID: </label>
+            <input type="text" name="nid" placeholder="Enter your NID"/>
+            <br />
+            <label>Password: </label>
+            <input type="text" name="pass" placeholder="Enter your password" />
+            <br />
+            <input  type="submit" value="Login"/>
+        </form>
+    </div>
+</body>
+</html>
